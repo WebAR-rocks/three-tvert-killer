@@ -100,7 +100,7 @@ function get_coincidentEdge(V):
 
 ## References
 
-[WebGL Academy](http://webglacademy.com): Interactive tutorials to learn WebGL and Three.js
-[Three.js official website](https:/threejs.org): Three.js doc and examples
-[Wikipedia](https://en.wikipedia.org/wiki/T-vertices): T-vertices definition
-[Github repo of Three-bvh-csg](https://github.com/gkjohnson/three-bvh-csg): The best CSG library for Three.js so far
+* [WebGL Academy](http://webglacademy.com): Interactive tutorials to learn WebGL and Three.js
+* [Three.js official website](https:/threejs.org): Three.js doc and examples
+* [Wikipedia](https://en.wikipedia.org/wiki/T-vertices): T-vertices definition
+* [Github repo of Three-bvh-csg](https://github.com/gkjohnson/three-bvh-csg): The best CSG library for Three.js so far
