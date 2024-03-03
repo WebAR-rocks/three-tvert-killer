@@ -1,5 +1,5 @@
 {
-  "name": "three-tvert-killer",
+  "name": "@webAR-rocks/three-tvert-killer",
   "version": "1.0.0",
   "description": "Remove T-Vertices from THREE.js geometries",
   "main": "index.js",
@@ -25,5 +25,12 @@
   "license": "MIT",
   "dependencies": {
     "three": "^0.162.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WebAR-rocks/three-tvert-killer"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/webAR-rocks"
   }
 }
