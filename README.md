@@ -25,18 +25,18 @@ T-vertices are bad, that's why we should kill'em:
 
 ## Usage
 
-Made for `NodeJS 16+`
+Tested with `NodeJS 16+`
 
 install:
 
 ```bash
-npm i three-tvert-killer
+npm i webAR-rocks/three-tvert-killer
 ```
 
 Run:
 
 ```javascript
-import { clean_tVerticesFromGeometry } from 'three-tvert-killer'
+import { clean_tVerticesFromGeometry } from '@webAR-rocks/three-tvert-killer'
 
 // it will change your geometry without returning a new one:
 const yourGeometryCleaned = clean_tVerticesFromGeometry(yourGeometry, options)

@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "vite": "^5.1.4"
+  },
+  "dependencies": {
+    "@webAR-rocks/three-tvert-killer": "github:webAR-rocks/three-tvert-killer"
   }
 }

@@ -13,9 +13,11 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js'
 
-import {
-  clean_tVerticesFromGeometry
-} from '../../src/TVKill.mjs'
+// debug local:
+import { clean_tVerticesFromGeometry } from '../../src/TVKill.mjs'
+
+// NPM package:
+//import { clean_tVerticesFromGeometry } from '@webAR-rocks/three-tvert-killer'
 
 
 let _scene = null, _renderer = null, _camera = null, _controls = null
