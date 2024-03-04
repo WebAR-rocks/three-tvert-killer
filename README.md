@@ -23,9 +23,9 @@ T-vertices are a major tesselation issue, that's why we should kill'em:
 
 * It makes the contour of the geometry hard to compute. For example, if you just want to render the edges of your geometry using [THREE.EdgeGeometry](https://threejs.org/docs/#api/en/geometries/EdgesGeometry), the edges having T-vertices will be wrongly displayed,
 * The geometry is not manifold anymore. It cannot be 3D printed directly,
-* It can create normal computations issues (so lighting issues),
+* It can create normals computation issues (so lighting issues),
 * Vertices dynamic displacements (through skinning, height mapping) will create artifacts,
-* Remesh algorithm (Delaunay tesselation, decimation) will fail.
+* Remeshing algorithm (Delaunay tesselation, decimation) will fail.
 
 
 ## Usage
