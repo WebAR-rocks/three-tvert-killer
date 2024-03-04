@@ -18,7 +18,7 @@
     "clean",
     "geometry",
     "buffergeometry",
-    "tesselation",
+    "tessellation",
     "mesh"
   ],
   "author": "Xavier Bourry",

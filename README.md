@@ -19,13 +19,13 @@ T-Vertices can be generated in different ways. Here are a few:
 * Your own code if you split a face without taking care of the surrounding linked faces
 
 
-T-vertices are a major tesselation issue, that's why we should kill'em:
+T-vertices are a major tessellation issue, that's why we should kill'em:
 
 * It makes the contour of the geometry hard to compute. For example, if you just want to render the edges of your geometry using [THREE.EdgeGeometry](https://threejs.org/docs/#api/en/geometries/EdgesGeometry), the edges having T-vertices will be wrongly displayed,
 * The geometry is not manifold anymore. It cannot be 3D printed directly,
 * It can create normals computation issues (so lighting issues),
 * Vertices dynamic displacements (through skinning, height mapping) will create artifacts,
-* Remeshing algorithm (Delaunay tesselation, decimation) will fail.
+* Remeshing algorithm (Delaunay tessellation, decimation) will fail.
 
 
 ## Usage
