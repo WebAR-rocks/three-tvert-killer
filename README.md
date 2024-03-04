@@ -5,7 +5,12 @@
   <img src='/TVerticesKiller.webp' />
 </p>
 
-Remove T-Vertices from THREE.js geometries.
+**Remove T-Vertices from THREE.js geometries.**
+
+
+## Problem
+
+A T-vertice is a point which coincides with an edge, but which does not belong to the edge. In general, a mesh with T-vertice is rendered correctly. But many operations on the mesh will fail. If we displace the T-Vertice, then it won't coincide with the edge anymore, and it will create a hole in the mesh.
 
 T-Vertices can be generated in different ways. Here are a few:
 
@@ -14,7 +19,7 @@ T-Vertices can be generated in different ways. Here are a few:
 * Your own code if you split a face without taking care of the surrounding linked faces
 
 
-T-vertices are bad, that's why we should kill'em:
+T-vertices are a major tesselation issue, that's why we should kill'em:
 
 * It makes the contour of the geometry hard to compute. For example, if you just want to render the edges of your geometry using [THREE.EdgeGeometry](https://threejs.org/docs/#api/en/geometries/EdgesGeometry), the edges having T-vertices will be wrongly displayed,
 * The geometry is not manifold anymore. It cannot be 3D printed directly,
