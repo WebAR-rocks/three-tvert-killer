@@ -14,9 +14,9 @@ A T-vertice is a point which coincides with an edge, but which does not belong t
 
 T-Vertices can be generated in different ways. Here are a few:
 
-* Output of `three-bvh-csg` CSG library can have T-vertices (see [this Github issue](https://github.com/gkjohnson/three-bvh-csg/issues/202))
-* Meshes generated with some CAD softwares (SketchUp)
-* Your own code if you split a face without taking care of the surrounding linked faces
+* Output of `three-bvh-csg` CSG library can have T-vertices (see [this Github issue](https://github.com/gkjohnson/three-bvh-csg/issues/202)),
+* Meshes generated with some CAD software (SketchUp),
+* Your code if you split a face without caring for the surrounding linked faces.
 
 
 T-vertices are a major tessellation issue, that's why we should kill'em:
