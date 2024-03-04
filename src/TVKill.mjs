@@ -7,7 +7,9 @@ import { mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js'
 const _defaultOptions = {
   mergeVertices: true,
   mergeVerticesTol: 0.00001,
-  alignmentTol: 0.0001
+  alignmentTol: 0.0001,
+  maxEdgesPerTVertex: 100,
+  verbose: true
 }
 
 
@@ -34,15 +36,27 @@ function clean_tVerticesFromGeometry(threeGeomRaw, optionsArg){
   const posAttr = threeGeom.attributes.position
   const v = new Vector3()
   let TVerticesCount = 0
+  let lastTVertInd = -1
+
   for (let vi=0; vi<posAttr.count; ++vi){
     v.fromBufferAttribute(posAttr, vi)
     let coincidentEdge = null
+    let coincidentEdgesPerTVertexCount = 0
+
     while (coincidentEdge = get_coincidentEdge(v, vi, edges.arr, alignmentTolSq)){
-      ++TVerticesCount
+      if (lastTVertInd !== vi){
+        ++TVerticesCount
+        lastTVertInd = vi
+        coincidentEdgesPerTVertexCount = 0
+      }
+      if (coincidentEdgesPerTVertexCount >= options.maxEdgesPerTVertex){
+        console.log('WARNING: a T-vertices has more than ', options.maxEdgesPerTVertex, ' coincident edges')
+        break
+      }
       
       const {ijMin, ijMax, faces} = coincidentEdge.edge
       if (ijMin === vi || ijMax === vi){
-        console.log('ERROR: A coincident edge cannot include the T-vertice')
+        console.log('WARNING: A coincident edge cannot include the T-vertice')
         debugger
       }
 
@@ -54,7 +68,7 @@ function clean_tVerticesFromGeometry(threeGeomRaw, optionsArg){
       faces.forEach((face) => {
         const vk = get_oppositeVertexInd(face, coincidentEdge.edge)
         if (vk === undefined){
-          console.log('ERROR: cannot get the opposite vertex of a face')
+          console.log('WARNING: cannot get the opposite vertex of a face')
           debugger
         }
 
@@ -92,7 +106,7 @@ function clean_tVerticesFromGeometry(threeGeomRaw, optionsArg){
 
         // We update faces in the already existing edges:
         if (!edgeIjMinK || !edgeIjMaxK){
-          console.log('ERROR: Cannot find a face to split existing edges')
+          console.log('WARNING: Cannot find a face to split existing edges')
           debugger
         }
         if (edgeIjMinK){
@@ -111,7 +125,9 @@ function clean_tVerticesFromGeometry(threeGeomRaw, optionsArg){
     rebuild_geometry(threeGeom, edges.arr)
   }
 
-  console.log('INFO in clean_tVerticesFromGeometry(): T-Vertices cleaned count =', TVerticesCount)
+  if (options.verbose){
+    console.log('INFO in clean_tVerticesFromGeometry(): T-Vertices cleaned count =', TVerticesCount)
+  }
 
   return threeGeom
 }
