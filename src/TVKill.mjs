@@ -248,10 +248,29 @@ function extract_edges(threeGeom){
     if (!edgesByKeys[key]){
       edgesByKeys[key] = create_edge(posAttr, i, j)
     }
-    edgesByKeys[key].faces.push(face)
+    if (face){
+      edgesByKeys[key].faces.push(face)
+    }
   }
 
   loop_onFaceIndices(threeGeom, (ia, ib, ic) => {
+    // exclude degenerate faces:
+    if (ia === ib && ia === ic){
+      return
+    }
+    if (ia === ib){
+      add_edge(ia, ic, null)
+      return
+    }
+    if (ia === ic){
+      add_edge(ia, ib, null)
+      return
+    }
+    if (ib === ic){
+      add_edge(ia, ib, null)
+      return
+    }
+
     const face = [ia, ib, ic]
     add_edge(ia, ib, face)
     add_edge(ib, ic, face)
