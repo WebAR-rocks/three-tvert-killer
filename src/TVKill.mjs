@@ -211,7 +211,19 @@ function get_coincidentEdge(v, vi, edges, alignmentTolSq){
 
     // let AB the edge, and u edge unit vector
     // test if u and VA are colinear:
-    const va = _vec3_2.copy(edge.pi).sub(v).normalize()
+
+    // we take P, the most distant point from v between A and B
+    const p = (v.distanceToSquared(edge.pi) > v.distanceToSquared(edge.pj)) ? edge.pi : edge.pj
+    const va = _vec3_2.copy(p).sub(v).normalize()
+    _vec3.crossVectors(va, edge.u)
+    const k = _vec3.lengthSq()
+    // k = sin(theta)^2, with theta angle between va and edge u 
+    // ~= theta^2 for small angles
+    return (k<alignmentTolSq)
+
+
+   
+    /*const va = _vec3_2.copy(edge.pi).sub(v).normalize()
     _vec3.crossVectors(va, edge.u)
     const ka = _vec3.lengthSq()
     // ka = sin(theta)^2, with theta angle between va and edge u 
@@ -223,7 +235,7 @@ function get_coincidentEdge(v, vi, edges, alignmentTolSq){
     va.copy(edge.pj).sub(v).normalize()
     _vec3.crossVectors(va, edge.u)
     const kb = _vec3.lengthSq()
-    return (kb<alignmentTolSq)
+    return (kb<alignmentTolSq)*/
   })
 
   return (edgeInd >=0 ) ? {
