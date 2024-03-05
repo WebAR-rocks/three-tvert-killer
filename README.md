@@ -51,7 +51,9 @@ const yourGeometryCleaned = clean_tVerticesFromGeometry(yourGeometry, options)
 * `options` is a facultative object with these properties:
   * `<boolean> mergeVertices`: if we merge vertices before cleaning the geometry. Default is `true`
   * `<float> mergeVerticesTol`: merge vertices tolerancy. Only used if `mergeVertices=true`. Default is `0.00001`
-  * `<float> alignmentTol`: consider 2 units vector as colinear if the length of their cross product is lower than this value. Default is `0.0001`
+  * `<float> alignmentTol`: consider 2 units vector as colinear if their angles in radians is lower than this value. Default is `0.000005`
+  * `<boolean> verbose`: log the number of T-vertices found, and other stories. Default is `true`
+  * `<int> maxEdgesPerTVertex`: break the while loop if a T-vertice is a T-vertices for more than this value edges. Default is `100`
 
 
 ## Requirements
@@ -101,6 +103,12 @@ function get_coincidentEdge(V):
 
   return null
 ```
+
+
+## Efficiency
+
+Time is `O(N²)`, so it should not be called in the rendering loop. For high poly geometries it may be slow.
+To make it `O(N.log(N))`, we should sort edges in an octree after the *1.Data preparation* step, then use this octree in `get_coincidentEdge` to only loop in edges in the same octree cells of the T-vertice candidate instead of looping on all edges.
 
 
 ## References

@@ -7,7 +7,7 @@ import { mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js'
 const _defaultOptions = {
   mergeVertices: true,
   mergeVerticesTol: 0.00001,
-  alignmentTol: 0.0001,
+  alignmentTol: 0.000005,
   maxEdgesPerTVertex: 100,
   verbose: true
 }
@@ -213,8 +213,17 @@ function get_coincidentEdge(v, vi, edges, alignmentTolSq){
     // test if u and VA are colinear:
     const va = _vec3_2.copy(edge.pi).sub(v).normalize()
     _vec3.crossVectors(va, edge.u)
-    const k = _vec3.lengthSq()
-    return (k<alignmentTolSq)
+    const ka = _vec3.lengthSq()
+    // ka = sin(theta)^2, with theta angle between va and edge u 
+    // ~= theta^2 for small angles
+    if (ka>alignmentTolSq){
+      return false
+    }
+
+    va.copy(edge.pj).sub(v).normalize()
+    _vec3.crossVectors(va, edge.u)
+    const kb = _vec3.lengthSq()
+    return (kb<alignmentTolSq)
   })
 
   return (edgeInd >=0 ) ? {
@@ -242,6 +251,7 @@ function create_edge(posAttr, i, j){
   return {
     key,
     pi: pi.clone(),
+    pj: pj.clone(),
     ijMin,
     ijMax,
     faces: [],
