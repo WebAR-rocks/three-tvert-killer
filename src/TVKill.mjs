@@ -278,7 +278,7 @@ function extract_edges(threeGeom){
   const posAttr = threeGeom.attributes.position
 
   // build edgesByKeys:
-  const edgesByKeys = {}
+  const edgesByKeys = new Map()
   const faces = []
 
   const add_edge = (i, j, face) => {
